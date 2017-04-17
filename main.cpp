@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include <iostream>
+#define GLUT_DISABLE_ATEXIT_HACK
 //#include <GLUT/glut.h>
 
 using namespace std;
@@ -170,6 +171,11 @@ void DrawSun(float cx, float cy, float r, int num_segments, int begindraw, int e
     glEnd();
 }
 
+void DrawGunung(){
+    DrawFullCircle(475,-725,400,1000,0,500,false);
+    DrawFullCircle(-100,-655,400,1000,0,1000,false);
+}
+
 
 /* =========================================*/
 /*                   MAIN                   */
@@ -190,6 +196,7 @@ void render(void) {
 
     DrawBackground();
     DrawSun(600, 350, 100, 1000, 0, 1000);
+    DrawGunung();
     glutSwapBuffers();
 }
 
