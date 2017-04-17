@@ -168,6 +168,27 @@ void DrawSun(float cx, float cy, float r, int num_segments, int begindraw, int e
         glVertex2f(x + cx, y + cy);//output vertex
     }
     glEnd();
+
+
+    for(int ii = 0; ii < 50; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(50);//get the current angle
+
+        float x1 = r * 1.15 * cosf(theta);  //calculate the x component
+        float y1 = r * 1.15 * sinf(theta);  //calculate the y component
+
+        float x2 = r * 1.4 * cosf(theta);  //calculate the x component
+        float y2 = r * 1.4 * sinf(theta);  //calculate the y component
+
+
+        glBegin(GL_LINES);
+
+        glColor3f(1.0, 1.0, 0.6);
+        glVertex2f(x1 + cx, y1 + cy);
+        glVertex2f(x2 + cx, y2 + cy);
+
+        glEnd();
+    }
 }
 
 
@@ -189,7 +210,7 @@ void render(void) {
     //=> SHAPES
 
     DrawBackground();
-    DrawSun(600, 350, 100, 1000, 0, 1000);
+    DrawSun(600, 200, 100, 1000, 0, 1000);
     glutSwapBuffers();
 }
 
