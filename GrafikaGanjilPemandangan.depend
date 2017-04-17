@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1492415697 source:c:\users\ramosjanoah\desktop\grafika\grafikaganjilpemandangan\main.cpp
+1492419928 source:c:\users\ramosjanoah\desktop\grafika\grafikaganjilpemandangan\main.cpp
 	<GL/glut.h>
 	<cmath>
 	<stdlib.h>
