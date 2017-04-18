@@ -267,17 +267,15 @@ void DrawPohon(float x, float y, float pohonSize){
         glVertex2f(x - len, i);
         glEnd();
     }
-    float redge = 0; float gedge = 0.5; float bedge = 0;
-    float rcenter = 0.2; float gcenter = 0.7; float bcenter = 0.2;
+    float redge = 0; float gedge = 0.0; float bedge = 0;
+    float rcenter = 0.1; float gcenter = 0.3; float bcenter = 0.1;
     for (int i = 0; i < 100; ++i) {
         int xdaun = rand() % (int)(pohonSize*4) - pohonSize*2;
         int ydaun = rand() % (int)(pohonSize*3) + pohonSize*3;
-        float diffx = xdaun - x;
-        float diffy = ydaun - y;
 
-        float colorOffset = (diffx + diffy) / (pohonSize*12);
+        float colorOffset = (float)(xdaun + ydaun) / (pohonSize*12);
 
-        DrawGradationCircle(x + xdaun, y + ydaun, pohonSize/2, redge + colorOffset, gedge + colorOffset, bedge + colorOffset, rcenter + colorOffset, gcenter + colorOffset, bcenter + colorOffset);
+        DrawGradationCircle(x + xdaun, y + ydaun, pohonSize/2, redge + colorOffset/2, gedge + colorOffset*3/2, bedge + colorOffset/2, rcenter + colorOffset/2, gcenter + colorOffset*3/2, bcenter + colorOffset/2);
     }
 }
 
@@ -354,7 +352,11 @@ void render(void) {
     DrawSun(600, 350, 100, 1000, 0, 1000);
     DrawGunung();
     DrawPelangi(0, -650, 0, 0);
-    DrawPohon(100,100,50);
+    DrawPohon(-200,-300,15);
+    DrawPohon(-100,-350,30);
+    DrawPohon(100,-550,50);
+    DrawPohon(375,-400,15);
+    DrawPohon(700,-500,45);
     glutSwapBuffers();
 }
 
