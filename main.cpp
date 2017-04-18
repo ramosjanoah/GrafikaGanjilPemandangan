@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdlib.h>
 #include <iostream>
+#include <stdlib.h>
 #define GLUT_DISABLE_ATEXIT_HACK
 //#include <GLUT/glut.h>
 
@@ -216,7 +217,7 @@ void DrawGradationCircle(float center_x,
                          float r_color_center,
                          float g_color_center,
                          float b_color_center) {
-    for(int ii = 0; ii < 1000; ii++)
+    for(int ii = 0; ii <= 1000; ii++)
     {
         float theta = 2.0 * 3.1415926f * float(ii) / float(1000);//get the current angle
 
@@ -233,7 +234,7 @@ void DrawGradationCircle(float center_x,
             glColor3f(r_color_center, g_color_center, b_color_center);
             glVertex2f(center_x, center_y);
             glEnd();
-            if (ii != 999) {
+            if (ii != 1000) {
                 glColor3f(r_color_edge, g_color_edge, b_color_edge);
                 glBegin(GL_TRIANGLES);
                 glVertex2f(x + center_x, y + center_y);
@@ -260,11 +261,23 @@ void DrawPohon(float x, float y, float pohonSize){
         v *= a;
         a *= a1;
         glBegin(GL_LINE_STRIP);
-        glColor3f(0.6, 0.3, 0.0);
+        glColor3f(0.8, 0.4, 0.15);
         glVertex2f(x + len, i);
-        glColor3f(0.84, 0.42, 0.14);
+        glColor3f(0.4, 0.15, 0.0);
         glVertex2f(x - len, i);
         glEnd();
+    }
+    float redge = 0; float gedge = 0.5; float bedge = 0;
+    float rcenter = 0.2; float gcenter = 0.7; float bcenter = 0.2;
+    for (int i = 0; i < 100; ++i) {
+        int xdaun = rand() % (int)(pohonSize*4) - pohonSize*2;
+        int ydaun = rand() % (int)(pohonSize*3) + pohonSize*3;
+        float diffx = xdaun - x;
+        float diffy = ydaun - y;
+
+        float colorOffset = (diffx + diffy) / (pohonSize*12);
+
+        DrawGradationCircle(x + xdaun, y + ydaun, pohonSize/2, redge + colorOffset, gedge + colorOffset, bedge + colorOffset, rcenter + colorOffset, gcenter + colorOffset, bcenter + colorOffset);
     }
 }
 
@@ -341,7 +354,7 @@ void render(void) {
     DrawSun(600, 350, 100, 1000, 0, 1000);
     DrawGunung();
     DrawPelangi(0, -650, 0, 0);
-    DrawPohon(0,0,50);
+    DrawPohon(100,100,50);
     glutSwapBuffers();
 }
 
