@@ -106,6 +106,21 @@ void DrawPartCircle(float cx, float cy, float r, int num_segments, int begindraw
     cout << " baunya tidak sedap" << endl;
 }
 
+void DrawSemiCircle(float cx, float cy, float r, int num_segments, int begindraw, int enddraw, float red, float green, float blue) {
+    glBegin(GL_LINE_STRIP);
+    glColor3f(red, green, blue);
+    for(int ii = begindraw; ii < min(num_segments, enddraw); ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(num_segments);//get the current angle
+
+        float x = r * cosf(theta);//calculate the x component
+        float y = r * sinf(theta);//calculate the y component
+
+        glVertex2f(x + cx, y + cy);//output vertex
+    }
+    glEnd();
+}
+
 void DrawRectangle(float x1, float y1, float x2, float y2) {
     glColor3f(r, g, b);
     glRectf(x1,y1,x2,y2);
@@ -193,9 +208,107 @@ void DrawSun(float cx, float cy, float r, int num_segments, int begindraw, int e
 }
 
 void DrawGunung(){
-    DrawFullCircle(475,-725,400,1000,0,500,false);
-    DrawFullCircle(-100,-655,400,1000,0,1000,false);
+//    DrawFullCircle(475,-725,400,1000,0,500,false);
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(0.0, 1.0, 0.0);
+    for(int ii = 0; ii < 1000; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(1000);//get the current angle
+
+        float x = 400 * cosf(theta);//calculate the x component
+        float y = 400 * sinf(theta);//calculate the y component
+
+        glVertex2f(x + 475, y + -725);//output vertex
+    }
+    glEnd();
+    glBegin(GL_LINE_STRIP);
+    glColor3f(1.3, 1.0, 1.3);
+    for(int ii = 0; ii < 1000; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(1000);//get the current angle
+
+        float x = 400 * cosf(theta);//calculate the x component
+        float y = 400 * sinf(theta);//calculate the y component
+
+        glVertex2f(x + 475, y + -725);//output vertex
+    }
+    glEnd();
+
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(0.0, 1.0, 0.0);
+    for(int ii = 0; ii < 1000; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(1000);//get the current angle
+
+        float x = 400 * cosf(theta);//calculate the x component
+        float y = 400 * sinf(theta);//calculate the y component
+
+        glVertex2f(x - 100, y + -655);//output vertex
+    }
+    glEnd();
+//    DrawFullCircle(-100,-655,400,1000,0,1000,false);
 }
+
+/*void DrawPohon(){
+    DrawFullCircle(0, 0, 40,1000,0,1000,false);
+    DrawFullCircle(30, -50, 40,1000,0,1000,false);
+    DrawFullCircle(50, -90, 40,1000,0,1000,false);
+    DrawFullCircle(60, -135, 40,1000,0,1000,false);
+    DrawFullCircle(50, -175, 40,1000,0,1000,false);
+    DrawFullCircle(40, -200, 40,1000,0,1000,false);
+    DrawFullCircle(10, -210, 40,1000,0,1000,false);
+    DrawFullCircle(-25, -215, 40,1000,0,1000,false);
+    DrawFullCircle(-65, -225, 40,1000,0,1000,false);
+    DrawFullCircle(-105, -190, 40,1000,0,1000,false);
+    DrawFullCircle(-140, -165, 40,1000,0,1000,false);
+    DrawFullCircle(-145, -110, 40,1000,0,1000,false);
+    DrawFullCircle(-125, -80, 40,1000,0,1000,false);
+    DrawFullCircle(-105, -50, 40,1000,0,1000,false);
+    DrawFullCircle(-80, -20, 40,1000,0,1000,false);
+    DrawFullCircle(-45, 10, 40,1000,0,1000,false);
+}*/
+
+void DrawPelangi(float x, float y, float x1, float y1){
+    float r,g,b;
+    r = 1; g = 0; b = 0;
+    int iter = 30;
+    float radius = 1000;
+    float diff = 1.0/iter;
+    for (int i = 0; i < (iter*3/4); ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        y -= 1;
+    }
+    for (int i = 0; i < iter*2; ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        g += diff; y -= 1;
+        if (g > 1.0) g = 1.0;
+    }
+    for (int i = 0; i < iter; ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        r -= diff; y -= 1;
+        if (r < 0) r = 0;
+    }
+    for (int i = 0; i < iter*2; ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        b += diff; y -= 1;
+        if (b > 1.0) b = 1.0;
+    }
+    for (int i = 0; i < iter; ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        g -= diff; y -= 1;
+        if (g < 0) g = 0;
+    }
+    for (int i = 0; i < iter; ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        r += diff; y -= 1;
+        if (r > 1.0) r = 1.0;
+    }
+    for (int i = 0; i < iter; ++i) {
+        DrawSemiCircle(x, y, radius, 1000, 0, 1000, r, g, b);
+        y -= 1;
+    }
+}
+
 
 
 /* =========================================*/
@@ -218,6 +331,8 @@ void render(void) {
     DrawBackground();
     DrawSun(600, 350, 100, 1000, 0, 1000);
     DrawGunung();
+    DrawPelangi(0, -900, 0, 0);
+    //DrawPohon();
     glutSwapBuffers();
 }
 
@@ -225,7 +340,7 @@ int main (int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(100, 100);
-    glutInitWindowSize(1000, 1000);
+    glutInitWindowSize(800, 1000);
     glutCreateWindow("DU RAH GHHHOOONN ZZZZZHHH");
 
     glutDisplayFunc(render);
