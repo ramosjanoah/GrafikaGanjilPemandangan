@@ -148,7 +148,7 @@ void DrawLine(float x1, float y1, float x2, float y2) {
 void DrawBackground() {
     glBegin(GL_POLYGON);
     float _y = 1500;
-    glColor3f(0.4, 0.6, 1);
+    glColor3f(0, 0, 0);
     glVertex2f(-1000, 800+_y);
     glVertex2f(1000, 800+_y);
 
@@ -157,55 +157,6 @@ void DrawBackground() {
     glVertex2f(-1000, -1000);
 
     glEnd();
-}
-
-void DrawSun(float cx, float cy, float r, int num_segments, int begindraw, int enddraw) {
-    glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1.0, 1.0, 0.6);
-    for(int ii = 0; ii < num_segments; ii++)
-    {
-        float theta = 2.0 * 3.1415926f * float(ii) / float(num_segments);//get the current angle
-
-        float x = r * 1.1 * cosf(theta);//calculate the x component
-        float y = r * 1.1 * sinf(theta);//calculate the y component
-
-        glVertex2f(x + cx, y + cy);//output vertex
-    }
-    glEnd();
-
-    glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1.0, 1.0, 0.0);
-    for(int ii = 0; ii < num_segments; ii++)
-    {
-        float theta = 2.0 * 3.1415926f * float(ii) / float(num_segments);//get the current angle
-
-        float x = r * cosf(theta);//calculate the x component
-        float y = r * sinf(theta);//calculate the y component
-
-        glVertex2f(x + cx, y + cy);//output vertex
-    }
-    glEnd();
-
-
-    for(int ii = 0; ii < 50; ii++)
-    {
-        float theta = 2.0 * 3.1415926f * float(ii) / float(50);//get the current angle
-
-        float x1 = r * 1.15 * cosf(theta);  //calculate the x component
-        float y1 = r * 1.15 * sinf(theta);  //calculate the y component
-
-        float x2 = r * 1.4 * cosf(theta);  //calculate the x component
-        float y2 = r * 1.4 * sinf(theta);  //calculate the y component
-
-
-        glBegin(GL_LINES);
-
-        glColor3f(1.0, 1.0, 0.6);
-        glVertex2f(x1 + cx, y1 + cy);
-        glVertex2f(x2 + cx, y2 + cy);
-
-        glEnd();
-    }
 }
 
 void DrawGradationCircle(float center_x,
@@ -244,11 +195,60 @@ void DrawGradationCircle(float center_x,
 
 }
 
+void DrawSun(float cx, float cy, float r, int num_segments, int begindraw, int enddraw) {
+    DrawGradationCircle(cx, cy, r, 1.0, 1.0, 0.2, 1.0, 1.0, 1.0);
+    /*glBegin(GL_TRIANGLE_FAN);
+    glColor3f(1.0, 1.0, 0.6);
+    for(int ii = 0; ii < num_segments; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(num_segments);//get the current angle
+
+        float x = r * 1.1 * cosf(theta);//calculate the x component
+        float y = r * 1.1 * sinf(theta);//calculate the y component
+
+        glVertex2f(x + cx, y + cy);//output vertex
+    }
+    glEnd();
+
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(1.0, 1.0, 0.0);
+    for(int ii = 0; ii < num_segments; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(num_segments);//get the current angle
+
+        float x = r * cosf(theta);//calculate the x component
+        float y = r * sinf(theta);//calculate the y component
+
+        glVertex2f(x + cx, y + cy);//output vertex
+    }
+    glEnd();*/
+
+
+    for(int ii = 0; ii < 50; ii++)
+    {
+        float theta = 2.0 * 3.1415926f * float(ii) / float(50);//get the current angle
+
+        float x1 = r * 1.15 * cosf(theta);  //calculate the x component
+        float y1 = r * 1.15 * sinf(theta);  //calculate the y component
+
+        float x2 = r * 1.4 * cosf(theta);  //calculate the x component
+        float y2 = r * 1.4 * sinf(theta);  //calculate the y component
+
+
+        glBegin(GL_LINES);
+
+        glColor3f(1.0, 1.0, 0.6);
+        glVertex2f(x1 + cx, y1 + cy);
+        glVertex2f(x2 + cx, y2 + cy);
+
+        glEnd();
+    }
+}
 
 void DrawGunung(){
 //    DrawFullCircle(475,-725,400,1000,0,500,false);
-    DrawGradationCircle(475, -725, 400, 0.0, 0.8, 0.0, 1.0, 1.0, 1.0);
-    DrawGradationCircle(-100, -655, 400, 0.0, 0.8, 0.0, 1.0, 1.0, 1.0);
+    DrawGradationCircle(475, -625, 400, 0.0, 0.8, 0.0, 1.0, 1.0, 1.0);
+    DrawGradationCircle(-100, -555, 400, 0.0, 0.8, 0.0, 1.0, 1.0, 1.0);
 }
 
 void DrawPohon(float x, float y, float pohonSize){
@@ -352,11 +352,11 @@ void render(void) {
     DrawSun(600, 350, 100, 1000, 0, 1000);
     DrawGunung();
     DrawPelangi(0, -650, 0, 0);
-    DrawPohon(-200,-300,15);
-    DrawPohon(-100,-350,30);
-    DrawPohon(100,-550,50);
-    DrawPohon(375,-400,15);
-    DrawPohon(700,-500,45);
+    DrawPohon(-200,-200,15);
+    DrawPohon(-100,-250,30);
+    DrawPohon(100,-450,50);
+    DrawPohon(375,-300,15);
+    DrawPohon(600,-400,45);
     glutSwapBuffers();
 }
 
